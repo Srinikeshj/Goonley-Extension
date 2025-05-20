@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Settings</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="settings.css" />
+</head>
+<body>
+  <button id="backBtn" style="position:absolute;top:10px;left:10px;z-index:10;">Back</button>
+  <h2>Particle Simulator Settings</h2>
+  <form id="settingsForm" style="margin-top:40px;">
+    <label>
+      Particle Color:
+      <select id="colorSelect">
+        <option value="white">White</option>
+        <option value="mixed">Mixed</option>
+        <option value="red">Red</option>
+        <option value="blue">Blue</option>
+        <option value="green">Green</option>
+        <option value="yellow">Yellow</option>
+        <option value="purple">Purple</option>
+        <option value="orange">Orange</option>
+        <option value="pink">Pink</option>
+      </select>
+    </label>
+    <br><br>
+    <label>
+      Particle Count:
+      <input type="range" id="particleCount" min="10" max="2000" value="100">
+      <span id="countDisplay">100</span>
+    </label>
+    <br><br>
+    <button type="button" id="saveBtn">Save</button>
+  </form>
+  <script src="settings.js"></script>
+</body>
+</html>

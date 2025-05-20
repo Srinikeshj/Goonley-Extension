@@ -1,0 +1,11 @@
+{
+  "name": "Goon Extensions",
+  "description": "Goon Extensions",
+  "version": "1.0",
+  "manifest_version": 3,
+  "permissions": ["storage"],
+  "action": {
+    "default_popup": "index.html",
+    "default_icon": "hello_extensions.png"
+  }
+}
