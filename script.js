@@ -7,6 +7,16 @@ function resizeCanvas() {
 }
 resizeCanvas();
 
+function bringWindowToFront() {
+  if (chrome && chrome.windows) {
+    chrome.windows.getCurrent((window) => {
+      if (window) {
+        chrome.windows.update(window.id, { focused: true });
+      }
+    });
+  }
+}
+
 let particles = [];
 const minMomentum = 1.0;
 const influenceRadius = 150;
@@ -30,13 +40,40 @@ class Particle {
     this.setRandomVelocity();
     this.radius = 3;
 
-    if (this.colorMode === "white") {
-      this.color = "white";
-    } else if (this.colorMode === "mixed" || this.colorMode === "rainbow") {
-      this.color = `hsl(${Math.random() * 360}, 70%, 60%)`;
+    // Color variant logic
+    let baseColor = this.colorMode;
+    let h = 0, s = 0, l = 0;
+
+    // Map named colors to HSL for easy light/dark variants
+    // Color for particles
+    const colorMap = {
+      white: [0, 0, 80],
+      red: [0, 80, 55],
+      blue: [210, 80, 55],
+      green: [140, 70, 50],
+      yellow: [50, 90, 60],
+      purple: [270, 60, 60],
+      orange: [30, 90, 60],
+      pink: [330, 70, 70],
+      mixed: [160, 60, 60]
+    };
+
+    if (baseColor in colorMap) {
+      [h, s, l] = colorMap[baseColor];
     } else {
-      this.color = this.colorMode;
+      // fallback to white
+      h = 0; s = 0; l = 100;
     }
+
+    // For "mixed", randomize hue as before
+    if (baseColor === "mixed") {
+      h = Math.floor(Math.random() * 360);
+    }
+
+    // Randomly vary lightness for each particle
+    const lightnessVariance = (Math.random() - 0.5) * 30; // -15 to +15
+    const particleLightness = Math.max(10, Math.min(90, l + lightnessVariance));
+    this.color = `hsl(${h}, ${s}%, ${particleLightness}%)`;
   }
 
   setRandomVelocity() {
@@ -111,8 +148,14 @@ chrome.storage.sync.get(["immersive", "color", "count"], (settings) => {
 });
 
 function animate() {
-  ctx.fillStyle = 'rgba(17, 17, 17, 0.05)';
+  // Create a more subtle gradient that works better for trails
+  const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+  gradient.addColorStop(0, 'rgba(17, 17, 17, 0.2)');
+  gradient.addColorStop(1, 'rgba(17, 17, 17, 0.05)');
+  ctx.fillStyle = gradient;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  bringWindowToFront();
 
   particles.forEach(p => {
     p.update();
@@ -126,13 +169,16 @@ window.addEventListener('mousedown', (e) => {
   if (e.button === 0) mouse.leftDown = true;
   if (e.button === 2) mouse.rightDown = true;
 });
+
 window.addEventListener('mouseup', (e) => {
   if (e.button === 0) mouse.leftDown = false;
   if (e.button === 2) mouse.rightDown = false;
 });
+
 window.addEventListener('mousemove', (e) => {
   mouse.x = e.clientX;
   mouse.y = e.clientY;
 });
+
 window.addEventListener('resize', resizeCanvas);
 window.addEventListener('contextmenu', (e) => e.preventDefault());

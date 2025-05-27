@@ -1,26 +1,465 @@
-button {
-  padding: 1.3em 3em;
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 2.5px;
-  font-weight: 500;
-  color: #000;
-  background-color: #fff;
-  border: none;
-  border-radius: 45px;
-  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease 0s;
+/* From Uiverse.io by vinodjangid07 */
+/* save button */
+.bookmarkBtn {
+  width: 90px;
+  height: 40px;
+  border-radius: 40px;
+  border: 1px solid var(--particle-color);
+  background-color: color-mix(in srgb, var(--particle-color) 70%, rgb(12, 12, 12)); /* Use the particle color */
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
+  transition-duration: 0.3s;
+  overflow: hidden;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+.IconContainer {
+  width: 43px;
+  height: 30px;
+  background: linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--particle-color) 80%, white),
+    var(--particle-color)
+  ); /* Use the particle color */
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  z-index: 2;
+  transition-duration: 0.3s;
+}
+
+.icon {
+  border-radius: 1px;
+  fill: white;
+}
+
+.text {
+  height: 100%;
+  width: 60px;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  z-index: 1;
+  transition-duration: 0.3s;
+  font-size: 16px;
+}
+
+.bookmarkBtn:hover .IconContainer {
+  width: 90px;
+  transition-duration: 0.3s;
+}
+
+.bookmarkBtn:hover .text {
+  transform: translate(10px);
+  width: 0;
+  font-size: 0;
+  transition-duration: 0.3s;
+}
+
+.bookmarkBtn:active {
+  transform: scale(0.95);
+  transition-duration: 0.3s;
+}
+
+/* From Uiverse.io by 3bdel3zizT */
+/* Custom select dropdown */
+.select {
+  width: fit-content;
+  cursor: pointer;
+  position: relative;
+  transition: 300ms;
+  color: #fff;
+  overflow: visible;
+  margin-bottom: 10px;
+  margin-left: 0;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+.selected {
+  background-color: var(--particle-color);
+  padding: 5px;
+  margin-bottom: 3px;
+  border-radius: 5px;
+  position: relative;
+  z-index: 100000;
+  font-size: 15px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.arrow {
+  position: relative;
+  right: 0px;
+  height: 10px;
+  transform: rotate(-90deg);
+  width: 25px;
+  fill: white;
+  z-index: 100000;
+  transition: 300ms;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  background-color: #2a2f3b;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  min-width: 150px;
+  opacity: 0;
+  pointer-events: none;
+  padding: 0; /* Remove left padding */
+  z-index: 100001;
+  transition: opacity 300ms;
+  max-height: 190px;
+  border: 1px solid color-mix(in srgb, var(--particle-color) 60%, #2a2f3b50);
+  overflow-y: auto;
+  overflow-x: hidden;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+/* Show dropdown on hover or focus */
+.select:hover > .options,
+.select:focus-within > .options {
+  opacity: 1;
+  pointer-events: auto;
+  padding: 5px 0; /* Remove left padding when open */
+}
+
+.option {
+  border-radius: 5px;
+  padding: 5px;
+  transition: 300ms;
+  background-color: #2a2f3b;
+  width: 150px;
+  font-size: 15px;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+.option:hover {
+  background-color: color-mix(in srgb, var(--particle-color) 80%, black);
+}
+
+.options input[type="radio"] {
+  display: none;
+}
+
+.options label {
+  display: inline-block;
+}
+.options label::before {
+  content: attr(data-txt);
+}
+
+.options input[type="radio"]:checked + label {
+  display: none;
+}
+
+.select:has(.options input[type="radio"]:checked) .selected::before {
+  content: attr(data-selected);
+}
+
+/* Sample CSS for a custom styled slider */
+/* Chrome/WebKit: slider track fills to thumb with a gradient, rest is #2a2f3b */
+input[type="range"] {
+  -webkit-appearance: none;
+  width: 180px;
+  height: 6px;
+  border-radius: 3px;
+  outline: none;
+  margin: 0;
+  /* The background will be set by JS for immediate effect, but provide a fallback gradient */
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--particle-color, #23c483) 40%, #181a20) 0%,
+    var(--particle-color, #23c483) 100%
+  );
+  transition: background 0.3s;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background-repeat: no-repeat;
+}
+
+input[type="range"]:hover {
+  background: #2a2f3b;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--particle-color, #23c483);
+  border: 2px solid #fff;
+  cursor: pointer;
+  transition: background 0.3s, border 0.3s;
+  box-shadow: 0 0 4px rgba(0,0,0,0.2);
+}
+
+input[type="range"]:hover::-webkit-slider-thumb {
+  background: #fff;
+  border: 2px solid var(--particle-color, #23c483);
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--particle-color, #23c483);
+  border: 2px solid #fff;
+  cursor: pointer;
+  transition: background 0.3s, border 0.3s;
+  box-shadow: 0 0 4px rgba(0,0,0,0.2);
+}
+
+input[type="range"]:hover::-moz-range-thumb {
+  background: #fff;
+  border: 2px solid var(--particle-color, #23c483);
+}
+
+input[type="range"]::-ms-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--particle-color, #23c483);
+  border: 2px solid #fff;
+  cursor: pointer;
+  transition: background 0.3s, border 0.3s;
+  box-shadow: 0 0 4px rgba(0,0,0,0.2);
+}
+
+input[type="range"]:hover::-ms-thumb {
+  background: #fff;
+  border: 2px solid var(--particle-color, #23c483);
+}
+
+input[type="range"]::-ms-fill-lower {
+  background: #222;
+  border-radius: 3px;
+}
+input[type="range"]::-ms-fill-upper {
+  background: #222;
+  border-radius: 3px;
+}
+
+input[type="range"]:focus {
   outline: none;
 }
 
-button:hover {
-  /* background-color will be set dynamically by JS */
-  box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
-  color: #000000;
-  transform: translateY(-7px);
+input[type="range"]:focus::-webkit-slider-thumb {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--particle-color) 40%, #ffffff20);
 }
 
-button:active {
-  transform: translateY(-1px);
+/* Remove default styles for Firefox */
+input[type="range"]::-moz-focus-outer {
+  border: 0;
+}
+
+.slider-container {
+  position: relative;
+  display: block;
+  margin-left: 0;
+  margin-top: 4px;
+  margin-bottom: 8px;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  width: 100%;
+  max-width: 220px; /* Reduced width */
+}
+
+#countDisplay {
+  position: absolute;
+  left: 50%;
+  top: -18px;
+  transform: translateX(-150%);
+  transform: translateY(60%);
+  background: color-mix(in srgb, var(--particle-color) 60%, #222);
+  color: white;
+  padding: 2px 10px;
+  border-radius: 8px;
+  font-size: 1em;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s, top 0.2s;
+  z-index: 2;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+/* Show when hovering or sliding */
+.slider-container:hover #countDisplay,
+.slider-container:focus-within #countDisplay,
+input[type="range"]:active + #countDisplay {
+  opacity: 1;
+  top: -40px;
+}
+
+/* Custom scrollbar for dropdown options */
+.options::-webkit-scrollbar {
+  width: 8px;
+  background: #2a2f3b;
+  border-radius: 6px;
+}
+
+.options::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--particle-color) 60%, #2a2f3b);
+  border-radius: 6px;
+}
+
+.options::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in srgb, var(--particle-color) 90%, #2a2f3b);
+}
+
+
+/* Back Button */
+.styled-wrapper {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  z-index: 10;
+}
+
+.styled-wrapper .button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: #2a2f3b;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.10);
+  transition: background 0.2s, box-shadow 0.2s;
+  position: relative;
+  outline: none;
+}
+
+.styled-wrapper .button:before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 44px;
+  height: 44px;
+  transform: translate(-50%, -50%) scale(0.95);
+  border-radius: 50%;
+  border: 2.5px solid var(--particle-color, #23c483);
+  opacity: 0;
+  transition: opacity 0.2s, transform 0.2s;
+  pointer-events: none;
+}
+
+.styled-wrapper .button:hover:before,
+.styled-wrapper .button:focus:before {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1.08);
+}
+
+.styled-wrapper .button:hover,
+.styled-wrapper .button:focus {
+  background: color-mix(in srgb, var(--particle-color) 10%, #23232b50);
+  box-shadow: 0 4px 16px 0 color-mix(in srgb, var(--particle-color) 20%, #000);
+  outline: 2.5px solid var(--particle-color, #23c483);
+}
+
+.styled-wrapper .button:active {
+  background: color-mix(in srgb, var(--particle-color) 15%, #23232b);
+  box-shadow: 0 4px 16px 0 color-mix(in srgb, var(--particle-color) 40%, #000);
+  border: 4.5px solid var(--particle-color, #23c483);
+  outline: none;
+}
+
+/* Remove border when not active */
+.styled-wrapper .button {
+  border: none;
+}
+
+.styled-wrapper .arrow-svg {
+  width: 22px;
+  height: 22px;
+  display: block;
+  fill: var(--particle-color, #23c483);
+  transition: fill 0.2s;
+}
+
+.styled-wrapper .button:hover .arrow-svg,
+.styled-wrapper .button:focus .arrow-svg {
+  fill: color-mix(in srgb, var(--particle-color) 80%, #fff);
+}
+
+/* General layout and text color for settings page */
+body {
+  color: #fff;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  /* Optional: set a max height for demonstration, remove if not needed */
+  /* max-height: 100vh; */
+}
+
+/* Custom scrollbar for the whole page (matches dropdown) */
+body::-webkit-scrollbar {
+  width: 8px;
+  background: #2a2f3b;
+  border-radius: 6px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--particle-color) 60%, #2a2f3b);
+  border-radius: 6px;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in srgb, var(--particle-color) 90%, #2a2f3b);
+}
+
+body {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--particle-color) 60%, #2a2f3b) #2a2f3b;
+}
+
+h2 {
+  color: #fff;
+  margin-left: 68px;
+  margin-top: 16px;
+  font-size: 22px;
+  letter-spacing: 0.4px;
+  font-weight: 600;
+}
+
+form {
+  margin: 0 0 0 16px;
+  color: #fff;
+  max-width: 400px;
+}
+
+label {
+  color: #fff;
+  font-size: 16px;
+  margin-bottom: 2px;
+  display: block;
+}
+
+.slider-container {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  width: 220px; /* Reduced width */
+  max-width: 220px;
+}
+
+.selected,
+.option,
+.options label {
+  color: #fff;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  font-size: 15px;
 }

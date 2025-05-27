@@ -1,11 +1,18 @@
 {
   "name": "Goon Extensions",
   "description": "Goon Extensions",
-  "version": "1.0",
+  "version": "3.2.0",
+  "icons": {
+    "16": "hello_extensions.png",
+    "48": "hello_extensions.png",
+    "128": "hello_extensions.png"
+  },
   "manifest_version": 3,
-  "permissions": ["storage"],
+  "permissions": ["storage", "system.display"],
   "action": {
-    "default_popup": "index.html",
     "default_icon": "hello_extensions.png"
+  },
+  "background": {
+    "service_worker": "background.js"
   }
 }

@@ -7,32 +7,92 @@
   <link rel="stylesheet" href="settings.css" />
 </head>
 <body>
-  <button id="backBtn" style="position:absolute;top:10px;left:10px;z-index:10;">Back</button>
+  <div class="styled-wrapper">
+    <button class="button" id="backBtn" type="button" title="Back">
+      <svg class="arrow-svg" viewBox="0 0 24 24">
+        <path d="M15.5 19.5L9 13H21v-2H9l6.5-6.5-1.42-1.42L4.16 12l9.92 9.92z"/>
+      </svg>
+    </button>
+  </div>
   <h2>Particle Simulator Settings</h2>
   <form id="settingsForm" style="margin-top:40px;">
-    <label>
-      Particle Color:
-      <select id="colorSelect">
-        <option value="white">White</option>
-        <option value="mixed">Mixed</option>
-        <option value="red">Red</option>
-        <option value="blue">Blue</option>
-        <option value="green">Green</option>
-        <option value="yellow">Yellow</option>
-        <option value="purple">Purple</option>
-        <option value="orange">Orange</option>
-        <option value="pink">Pink</option>
-      </select>
-    </label>
-    <br><br>
+    <div class="select" id="colorDropdown">
+      <label style="margin-bottom: 0;">
+        Particle Color:
+      </label>
+      <div
+        class="selected"
+        data-selected="White"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          height="1em"
+          viewBox="0 0 512 512"
+          class="arrow"
+        >
+          <path
+            d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"
+          ></path>
+        </svg>
+      </div>
+      <div class="options">
+        <div title="white">
+          <input id="white" name="color" type="radio" checked />
+          <label class="option" for="white" data-txt="White"></label>
+        </div>
+        <div title="mixed">
+          <input id="mixed" name="color" type="radio" />
+          <label class="option" for="mixed" data-txt="Mixed"></label>
+        </div>
+        <div title="red">
+          <input id="red" name="color" type="radio" />
+          <label class="option" for="red" data-txt="Red"></label>
+        </div>
+        <div title="blue">
+          <input id="blue" name="color" type="radio" />
+          <label class="option" for="blue" data-txt="Blue"></label>
+        </div>
+        <div title="green">
+          <input id="green" name="color" type="radio" />
+          <label class="option" for="green" data-txt="Green"></label>
+        </div>
+        <div title="yellow">
+          <input id="yellow" name="color" type="radio" />
+          <label class="option" for="yellow" data-txt="Yellow"></label>
+        </div>
+        <div title="purple">
+          <input id="purple" name="color" type="radio" />
+          <label class="option" for="purple" data-txt="Purple"></label>
+        </div>
+        <div title="orange">
+          <input id="orange" name="color" type="radio" />
+          <label class="option" for="orange" data-txt="Orange"></label>
+        </div>
+        <div title="pink">
+          <input id="pink" name="color" type="radio" />
+          <label class="option" for="pink" data-txt="Pink"></label>
+        </div>
+      </div>
+    </div>
     <label>
       Particle Count:
-      <input type="range" id="particleCount" min="10" max="2000" value="100">
-      <span id="countDisplay">100</span>
+      <div class="slider-container">
+        <input type="range" id="particleCount" min="10" max="2000" value="100">
+        <span id="countDisplay">100</span>
+      </div>
     </label>
-    <br><br>
-    <button type="button" id="saveBtn">Save</button>
+    <button type="button" id="saveBtn" class="bookmarkBtn">
+      <span class="IconContainer">
+        <svg viewBox="0 0 384 512" height="0.9em" class="icon">
+          <path
+            d="M0 48V487.7C0 501.1 10.9 512 24.3 512c5 0 9.9-1.5 14-4.4L192 400 345.7 507.6c4.1 2.9 9 4.4 14 4.4c13.4 0 24.3-10.9 24.3-24.3V48c0-26.5-21.5-48-48-48H48C21.5 0 0 21.5 0 48z"
+          ></path>
+        </svg>
+      </span>
+      <p class="text">Save</p>
+    </button>
   </form>
   <script src="settings.js"></script>
+  <script src="index.js"></script>
 </body>
 </html>
